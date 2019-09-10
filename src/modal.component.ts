@@ -42,25 +42,50 @@ export class ModalComponent implements OnDestroy {
   }
 
   getPosition(event){
-    let offsetLeft = 0;
-    let offsetTop = 0;
-
-    let el = event.srcElement;
-
-    while(el){
-        offsetLeft += el.offsetLeft;
-        offsetTop += el.offsetTop;
-        el = el.parentElement;
-    }
-    return { offsetTop:offsetTop , offsetLeft:offsetLeft }
+    return { offsetTop:event.srcElement['offsetTop'] , offsetLeft:event.srcElement['offsetLeft'] }
 }
 
-  open($event: any): void {
+  open($event?: any): void {
     document.body.classList.add('modal-open');
 
-    this.config.offsetLeft = this.getPosition($event).offsetLeft
-    this.config.offsetTop = this.getPosition($event).offsetTop
+    this.config.offsetLeft = $event ? $event.srcElement['offsetLeft'] : 0
+    this.config.offsetTop = $event ? $event.srcElement['offsetTop'] : 0
     console.log(this.config)
+    // .top-center {
+    //   'top': this.config.offsetTop - (heightModal + 20px);
+    //   'left': this.config.offsetLeft - (withModal - withButton)/2;
+    // }
+    // .top-left {
+    //   'top': this.config.offsetTop - (heightModal + 20px);
+    //   'left': this.config.offsetLeft;
+    // }
+    // .top-right {
+    //   'top': this.config.offsetTop - (heightModal + 10px);
+    //   'left': this.config.offsetLeft - (withModal - withButton);
+    // }
+
+    
+    // .left-top {
+    //   'top': this.config.offsetTop - (heightModal - heightButton)/2;
+    //   'left': this.config.offsetLeft - withModal - 20px;
+    // }
+    // .left-center {
+    //   'top': this.config.offsetTop - (heightModal - heightButton)/2;
+    //   'left': this.config.offsetLeft - withModal - 20px;
+    // }
+
+    // .bottom-center {
+    //   'top': this.config.offsetTop + heightModal + 20px;
+    //   'left': this.config.offsetLeft - (withModal - withButton)/2;
+    // }
+    // .bottom-left {
+    //   'top': this.config.offsetTop + heightModal + 20px;
+    //   'left': this.config.offsetLeft;
+    // }
+    // .bottom-right {
+    //   'top': this.config.offsetTop + heightModal + 20px;
+    //   'left': this.config.offsetLeft - (withModal - withButton);
+    // }
     this.visible = true;
     setTimeout(() => {
       this.visibleAnimate = true;
