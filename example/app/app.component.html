@@ -7,12 +7,12 @@
     </a>
 
     <div id="actions">
-      <button class="big" (click)="componentTopModal.open()">TOP</button>
+      <button class="big" (click)="componentTopModal.open($event)">TOP</button>
       <!-- Alternatively we can define the open call on the component
         <button class="big" (click)="openFromComponent()"></button> -->
-      <button class="big" (click)="componentRightModal.open()">RIGHT</button>
-      <button class="big" (click)="componentLeftModal.open()">LEFT</button>
-      <button class="big" (click)="componentBottomModal.open()">BOTTOM</button>
+      <button class="big" (click)="componentTopModal.open($event)">RIGHT</button>
+      <button class="big" (click)="componentTopModal.open($event)">LEFT</button>
+      <button class="big" (click)="componentTopModal.open($event)">BOTTOM</button>
 
       <!-- Example 1: Component TOP Modal -->
       <modal #componentTopModal>
@@ -22,7 +22,7 @@
       </modal>     
 
       <!--- Example 4: Prevent modal to be dismissed when clicking outside it -->
-      <modal #ignoreClickOutside [closeOnOutsideClick]="false"></modal>
+      <modal #ignoreClickOutside [config]="config"></modal>
 
     </div>
   </div>

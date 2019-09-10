@@ -16,6 +16,9 @@ export class AppComponent implements OnInit {
   @ViewChild('componentModal', {static: false}) componentModal: ModalComponent;
 
   modalCss = 0; // @See toggleCssInjector()
+  public config: any = {
+    'closeOnOutsideClick': false
+  }
 
   ngOnInit() {
     this.toggleCssInjector();
