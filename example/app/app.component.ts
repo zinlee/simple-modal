@@ -13,7 +13,7 @@ const MODAL_CSS: string[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
-  @ViewChild('componentInsideModal', {static: false}) componentInsideModal: ModalComponent;
+  @ViewChild('componentModal', {static: false}) componentModal: ModalComponent;
 
   modalCss = 0; // @See toggleCssInjector()
 
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   }
 
   openFromComponent() {
-    this.componentInsideModal.open();
+    this.componentModal.open();
   }
 
   // ToggleCssInjector is just for the sake of the demo, switching between custom and Boostrap
