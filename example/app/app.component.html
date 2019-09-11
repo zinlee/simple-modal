@@ -7,21 +7,121 @@
     </a>
 
     <div id="actions">
-      <button class="big" (click)="componentTopModal.open($event)">TOP</button>
+      <!-- TOP -->
+      <button class="big" (click)="componentTopCenterModal.open($event)">TOP CENTER</button>
+      <button class="big" (click)="componentTopLeftModal.open($event)">TOP LEFT</button>
+      <button class="big" (click)="componentTopRightModal.open($event)">TOP RIGHT</button>
+
+      <!-- LEFT -->
+      <button class="big" (click)="componentLeftTopModal.open($event)">LEFT TOP</button>
+      <button class="big" (click)="componentLeftCenterModal.open($event)">LEFT CENTER</button>
+      <button class="big" (click)="componentLeftBottomModal.open($event)">LEFT BOTTOM</button>
+
+      <!-- BOTTOM -->
+      <button class="big" (click)="componentBottomLeftModal.open($event)">BOTTOM LEFT</button>
+      <button class="big" (click)="componentBottomCenterModal.open($event)">BOTTOM CENTER</button>
+      <button class="big" (click)="componentBottomRightModal.open($event)">BOTTOM RIGHT</button>
+
+      <!-- RIGHT -->
+      <button class="big" (click)="componentRightTopModal.open($event)">RIGHT TOP</button>
+      <button class="big" (click)="componentRightCenterModal.open($event)">RIGHT CENTER</button>
+      <button class="big" (click)="componentRightBottomModal.open($event)">RIGHT BOTTOM</button>
       <!-- Alternatively we can define the open call on the component
         <button class="big" (click)="openFromComponent()"></button> -->
-      <button class="big" (click)="componentTopModal.open($event)">RIGHT</button>
-      <button class="big" (click)="componentTopModal.open($event)">LEFT</button>
-      <button class="big" (click)="componentTopModal.open($event)">BOTTOM</button>
 
       <!-- Example 1: Component TOP Modal -->
-      <modal #componentTopModal>
-        <ng-template #modalHeader><h2>Component Top Modal</h2></ng-template>
+      <modal #componentTopCenterModal [config]='configTopCenter'>
+        <ng-template #modalHeader>
+          <h2>Component Top Right Modal</h2>
+        </ng-template>
         <ng-template #modalBody> This is Body </ng-template>
         <ng-template #modalFooter></ng-template>
-      </modal>     
+      </modal>
+      <modal #componentTopLeftModal [config]='configTopLeft'>
+        <ng-template #modalHeader>
+          <h2>Component Top Left Modal</h2>
+        </ng-template>
+        <ng-template #modalBody> This is Body </ng-template>
+        <ng-template #modalFooter></ng-template>
+      </modal>
+      <modal #componentTopRightModal [config]='configTopRight'>
+        <ng-template #modalHeader>
+          <h2>Component Top Right Modal</h2>
+        </ng-template>
+        <ng-template #modalBody> This is Body </ng-template>
+        <ng-template #modalFooter></ng-template>
+      </modal>
 
-      <!--- Example 4: Prevent modal to be dismissed when clicking outside it -->
+      <!-- Example 2: Component LEFT Modal -->
+      <modal #componentLeftTopModal [config]='configLeftTop'>
+        <ng-template #modalHeader>
+          <h2>Component Left Top Modal</h2>
+        </ng-template>
+        <ng-template #modalBody> This is Body </ng-template>
+        <ng-template #modalFooter></ng-template>
+      </modal>
+      <modal #componentLeftCenterModal [config]='configLeftCenter'>
+        <ng-template #modalHeader>
+          <h2>Component Top Left Center Modal</h2>
+        </ng-template>
+        <ng-template #modalBody> This is Body </ng-template>
+        <ng-template #modalFooter></ng-template>
+      </modal>
+      <modal #componentLeftBottomModal [config]='configLeftBottom'>
+        <ng-template #modalHeader>
+          <h2>Component Left Bottom Modal</h2>
+        </ng-template>
+        <ng-template #modalBody> This is Body </ng-template>
+        <ng-template #modalFooter></ng-template>
+      </modal>
+
+      <!-- Example 3: Component BOTTOM Modal -->
+      <modal #componentBottomLeftModal [config]='configBottomLeft'>
+        <ng-template #modalHeader>
+          <h2>Component Bottom Left Modal</h2>
+        </ng-template>
+        <ng-template #modalBody> This is Body </ng-template>
+        <ng-template #modalFooter></ng-template>
+      </modal>
+      <modal #componentBottomCenterModal [config]='configBottomCenter'>
+        <ng-template #modalHeader>
+          <h2>Component Bottom Center Modal</h2>
+        </ng-template>
+        <ng-template #modalBody> This is Body </ng-template>
+        <ng-template #modalFooter></ng-template>
+      </modal>
+      <modal #componentBottomRightModal [config]='configBottomRight'>
+        <ng-template #modalHeader>
+          <h2>Component Bottom Right Modal</h2>
+        </ng-template>
+        <ng-template #modalBody> This is Body </ng-template>
+        <ng-template #modalFooter></ng-template>
+      </modal>
+
+      <!-- Example 4: Component RIGHT Modal -->
+      <modal #componentRightTopModal [config]='configRightTop'>
+        <ng-template #modalHeader>
+          <h2>Component Bottom Left Modal</h2>
+        </ng-template>
+        <ng-template #modalBody> This is Body </ng-template>
+        <ng-template #modalFooter></ng-template>
+      </modal>
+      <modal #componentRightCenterModal [config]='configRightCenter'>
+        <ng-template #modalHeader>
+          <h2>Component Bottom Center Modal</h2>
+        </ng-template>
+        <ng-template #modalBody> This is Body </ng-template>
+        <ng-template #modalFooter></ng-template>
+      </modal>
+      <modal #componentRightBottomModal [config]='configRightBottom'>
+        <ng-template #modalHeader>
+          <h2>Component Bottom Right Modal</h2>
+        </ng-template>
+        <ng-template #modalBody> This is Body </ng-template>
+        <ng-template #modalFooter></ng-template>
+      </modal>
+
+      <!--- Example 5: Prevent modal to be dismissed when clicking outside it -->
       <modal #ignoreClickOutside [config]="config"></modal>
 
     </div>

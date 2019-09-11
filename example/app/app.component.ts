@@ -17,7 +17,58 @@ export class AppComponent implements OnInit {
 
   modalCss = 0; // @See toggleCssInjector()
   public config: any = {
-    'closeOnOutsideClick': false
+    'closeOnOutsideClick': false,
+  }
+  public configTopCenter: any = {
+    'closeOnOutsideClick': false,
+    'position': 'top-center'
+  }
+  public configTopLeft: any = {
+    'closeOnOutsideClick': false,
+    'position': 'top-left'
+  }
+  public configTopRight: any = {
+    'closeOnOutsideClick': false,
+    'position': 'top-right'
+  }
+
+  public configLeftTop: any = {
+    'closeOnOutsideClick': false,
+    'position': 'left-top'
+  }
+  public configLeftCenter: any = {
+    'closeOnOutsideClick': false,
+    'position': 'left-center'
+  }
+  public configLeftBottom: any = {
+    'closeOnOutsideClick': false,
+    'position': 'left-bottom'
+  }
+
+  public configBottomCenter: any = {
+    'closeOnOutsideClick': false,
+    'position': 'bottom-center'
+  }
+  public configBottomLeft: any = {
+    'closeOnOutsideClick': false,
+    'position': 'bottom-left'
+  }
+  public configBottomRight: any = {
+    'closeOnOutsideClick': false,
+    'position': 'bottom-right'
+  }
+
+  public configRightCenter: any = {
+    'closeOnOutsideClick': false,
+    'position': 'right-center'
+  }
+  public configRightTop: any = {
+    'closeOnOutsideClick': false,
+    'position': 'right-top'
+  }
+  public configRightBottom: any = {
+    'closeOnOutsideClick': false,
+    'position': 'right-bottom'
   }
 
   ngOnInit() {
@@ -25,7 +76,6 @@ export class AppComponent implements OnInit {
   }
 
   openFromComponent() {
-    this.componentModal.open();
   }
 
   // ToggleCssInjector is just for the sake of the demo, switching between custom and Boostrap

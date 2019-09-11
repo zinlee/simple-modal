@@ -18,13 +18,14 @@ import {
   styleUrls: ['modal.component.scss'],
 })
 export class ModalComponent implements OnDestroy {
-  @ContentChild('modalHeader', {static: false}) header: TemplateRef<any>;
-  @ContentChild('modalBody', {static: false}) body: TemplateRef<any>;
-  @ContentChild('modalFooter', {static: false}) footer: TemplateRef<any>;
+  @ContentChild('modalHeader', { static: false }) header: TemplateRef<any>;
+  @ContentChild('modalBody', { static: false }) body: TemplateRef<any>;
+  @ContentChild('modalFooter', { static: false }) footer: TemplateRef<any>;
   @Input() config: any = {
     'closeOnOutsideClick': true,
     'offsetLeft': 0,
-    'offsetTop': 0
+    'offsetTop': 0,
+    'position': ''
   };
 
   visible = false;
@@ -41,54 +42,84 @@ export class ModalComponent implements OnDestroy {
     this.close();
   }
 
-  getPosition(event){
-    return { offsetTop:event.srcElement['offsetTop'] , offsetLeft:event.srcElement['offsetLeft'] }
-}
+  setPosition(position, modal, button) {
+    switch (position) {
+      // TOP
+      case 'top-left': {
+        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight + button.target.clientHeight - 20)}px`;
+        modal[0].style.left = `${this.config.offsetLeft}px`;
+        break
+      }
+      case 'top-center': {
+        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight + button.target.clientHeight - 20)}px`;
+        modal[0].style.left = `${this.config.offsetLeft - (modal[0].offsetWidth - button.target.clientWidth)/2}px`;
+        break
+      }
+      case 'top-right': {
+        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight + button.target.clientHeight - 20)}px`;
+        modal[0].style.left = `${this.config.offsetLeft - (modal[0].offsetWidth - button.target.clientWidth)}px`;
+        break
+      }
+      // LEFT
+      case 'left-top': {
+        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight + button.target.clientHeight - 10)/2}px`;
+        modal[0].style.left = `${this.config.offsetLeft - modal[0].offsetWidth - 20}px`;
+        break
+      }
+      case 'left-center': {
+        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight - button.target.clientHeight + 10)}px`;
+        modal[0].style.left = `${this.config.offsetLeft - modal[0].offsetWidth - 20}px`;
+        break
+      }
+      case 'left-bottom': {
+        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight - button.target.clientHeight) + 20}px`;
+        modal[0].style.left = `${this.config.offsetLeft - modal[0].offsetWidth - 20}px`;
+        break
+      }
+      // RIGHT
+      case 'right-top': {
+        modal[0].style.top = `${this.config.offsetTop - modal[0].offsetHeight + button.target.clientHeight + 20}px`;
+        modal[0].style.left = `${this.config.offsetLeft + (modal[0].offsetWidth + button.target.clientWidth)/2 - 20}px`;
+        break
+      }
+      case 'right-center': {
+        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight - button.target.clientHeight) - 10}px`;
+        modal[0].style.left = `${this.config.offsetLeft + (modal[0].offsetWidth + button.target.clientWidth)/2 - 40}px`;
+        break
+      }
+      case 'right-bottom': {
+        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight + button.target.clientHeight - 10)/2}px`;
+        modal[0].style.left = `${this.config.offsetLeft + (modal[0].offsetWidth + button.target.clientWidth)/2 - 40}px`;
+        break
+      }
+      // BOTTOM
+      case 'bottom-left': {
+        modal[0].style.top = `${this.config.offsetTop + modal[0].offsetHeight - button.target.clientHeight - 20}px`;
+        modal[0].style.left = `${this.config.offsetLeft}px`;
+        break
+      }
+      case 'bottom-center': {
+        modal[0].style.top = `${this.config.offsetTop + modal[0].offsetHeight - button.target.clientHeight - 20}px`;
+        modal[0].style.left = `${this.config.offsetLeft - (modal[0].offsetWidth - button.target.clientWidth)/2}px`;
+        break
+      }
+      case 'bottom-right': {
+        modal[0].style.top = `${this.config.offsetTop + modal[0].offsetHeight - button.target.clientHeight - 20}px`;
+        modal[0].style.left = `${this.config.offsetLeft - (modal[0].offsetWidth - button.target.clientWidth)}px`;
+        break
+      }
+    }
+  }
 
   open($event?: any): void {
     document.body.classList.add('modal-open');
-
+    let dialog: any = document.body.getElementsByClassName('modal-dialog');
     this.config.offsetLeft = $event ? $event.srcElement['offsetLeft'] : 0
     this.config.offsetTop = $event ? $event.srcElement['offsetTop'] : 0
-    console.log(this.config)
-    // .top-center {
-    //   'top': this.config.offsetTop - (heightModal + 20px);
-    //   'left': this.config.offsetLeft - (withModal - withButton)/2;
-    // }
-    // .top-left {
-    //   'top': this.config.offsetTop - (heightModal + 20px);
-    //   'left': this.config.offsetLeft;
-    // }
-    // .top-right {
-    //   'top': this.config.offsetTop - (heightModal + 10px);
-    //   'left': this.config.offsetLeft - (withModal - withButton);
-    // }
-
-    
-    // .left-top {
-    //   'top': this.config.offsetTop - (heightModal - heightButton)/2;
-    //   'left': this.config.offsetLeft - withModal - 20px;
-    // }
-    // .left-center {
-    //   'top': this.config.offsetTop - (heightModal - heightButton)/2;
-    //   'left': this.config.offsetLeft - withModal - 20px;
-    // }
-
-    // .bottom-center {
-    //   'top': this.config.offsetTop + heightModal + 20px;
-    //   'left': this.config.offsetLeft - (withModal - withButton)/2;
-    // }
-    // .bottom-left {
-    //   'top': this.config.offsetTop + heightModal + 20px;
-    //   'left': this.config.offsetLeft;
-    // }
-    // .bottom-right {
-    //   'top': this.config.offsetTop + heightModal + 20px;
-    //   'left': this.config.offsetLeft - (withModal - withButton);
-    // }
     this.visible = true;
     setTimeout(() => {
       this.visibleAnimate = true;
+      this.setPosition(this.config.position, dialog, $event)
     });
   }
 
