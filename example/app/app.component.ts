@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   modalCss = 0; // @See toggleCssInjector()
   public config: any = {
     'closeOnOutsideClick': false,
+    'position': ''
   }
   public configTopCenter: any = {
     'closeOnOutsideClick': false,
@@ -75,7 +76,8 @@ export class AppComponent implements OnInit {
     this.toggleCssInjector();
   }
 
-  openFromComponent() {
+  openFromComponent($event) {
+    this.componentModal.open($event);
   }
 
   // ToggleCssInjector is just for the sake of the demo, switching between custom and Boostrap

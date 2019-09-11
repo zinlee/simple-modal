@@ -46,66 +46,66 @@ export class ModalComponent implements OnDestroy {
     switch (position) {
       // TOP
       case 'top-left': {
-        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight + button.target.clientHeight - 20)}px`;
+        modal[0].style.top = `${this.config.offsetTop - modal[0].offsetHeight}px`;
         modal[0].style.left = `${this.config.offsetLeft}px`;
         break
       }
       case 'top-center': {
-        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight + button.target.clientHeight - 20)}px`;
+        modal[0].style.top = `${this.config.offsetTop - modal[0].offsetHeight}px`;
         modal[0].style.left = `${this.config.offsetLeft - (modal[0].offsetWidth - button.target.clientWidth)/2}px`;
         break
       }
       case 'top-right': {
-        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight + button.target.clientHeight - 20)}px`;
+        modal[0].style.top = `${this.config.offsetTop - modal[0].offsetHeight}px`;
         modal[0].style.left = `${this.config.offsetLeft - (modal[0].offsetWidth - button.target.clientWidth)}px`;
         break
       }
       // LEFT
       case 'left-top': {
-        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight + button.target.clientHeight - 10)/2}px`;
-        modal[0].style.left = `${this.config.offsetLeft - modal[0].offsetWidth - 20}px`;
+        modal[0].style.top = `${this.config.offsetTop}px`;
+        modal[0].style.left = `${this.config.offsetLeft - modal[0].offsetWidth}px`; // DONE
         break
       }
       case 'left-center': {
-        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight - button.target.clientHeight + 10)}px`;
-        modal[0].style.left = `${this.config.offsetLeft - modal[0].offsetWidth - 20}px`;
+        modal[0].style.top = `${(this.config.offsetTop - (modal[0].offsetHeight - button.target.clientHeight)/2)}px`; // DONE
+        modal[0].style.left = `${this.config.offsetLeft - modal[0].offsetWidth}px`;
         break
       }
       case 'left-bottom': {
-        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight - button.target.clientHeight) + 20}px`;
-        modal[0].style.left = `${this.config.offsetLeft - modal[0].offsetWidth - 20}px`;
-        break
-      }
-      // RIGHT
-      case 'right-top': {
-        modal[0].style.top = `${this.config.offsetTop - modal[0].offsetHeight + button.target.clientHeight + 20}px`;
-        modal[0].style.left = `${this.config.offsetLeft + (modal[0].offsetWidth + button.target.clientWidth)/2 - 20}px`;
-        break
-      }
-      case 'right-center': {
-        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight - button.target.clientHeight) - 10}px`;
-        modal[0].style.left = `${this.config.offsetLeft + (modal[0].offsetWidth + button.target.clientWidth)/2 - 40}px`;
-        break
-      }
-      case 'right-bottom': {
-        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight + button.target.clientHeight - 10)/2}px`;
-        modal[0].style.left = `${this.config.offsetLeft + (modal[0].offsetWidth + button.target.clientWidth)/2 - 40}px`;
+        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight - button.target.clientHeight)}px`; // DONE
+        modal[0].style.left = `${this.config.offsetLeft - modal[0].offsetWidth}px`;
         break
       }
       // BOTTOM
       case 'bottom-left': {
-        modal[0].style.top = `${this.config.offsetTop + modal[0].offsetHeight - button.target.clientHeight - 20}px`;
+        modal[0].style.top = `${this.config.offsetTop + button.target.clientHeight}px`;
         modal[0].style.left = `${this.config.offsetLeft}px`;
         break
       }
       case 'bottom-center': {
-        modal[0].style.top = `${this.config.offsetTop + modal[0].offsetHeight - button.target.clientHeight - 20}px`;
-        modal[0].style.left = `${this.config.offsetLeft - (modal[0].offsetWidth - button.target.clientWidth)/2}px`;
+        modal[0].style.top = `${this.config.offsetTop + button.target.clientHeight}px`;
+        modal[0].style.left = `${this.config.offsetLeft - (modal[0].offsetWidth - button.target.clientWidth)/2}px`; // DONE
         break
       }
       case 'bottom-right': {
-        modal[0].style.top = `${this.config.offsetTop + modal[0].offsetHeight - button.target.clientHeight - 20}px`;
+        modal[0].style.top = `${this.config.offsetTop + button.target.clientHeight}px`;
         modal[0].style.left = `${this.config.offsetLeft - (modal[0].offsetWidth - button.target.clientWidth)}px`;
+        break
+      }
+      // RIGHT
+      case 'right-top': {
+        modal[0].style.top = `${this.config.offsetTop}px`;
+        modal[0].style.left = `${this.config.offsetLeft + button.target.clientWidth}px`; // DONE
+        break
+      }
+      case 'right-center': {
+        modal[0].style.top = `${(this.config.offsetTop - (modal[0].offsetHeight - button.target.clientHeight)/2)}px`;
+        modal[0].style.left = `${this.config.offsetLeft + button.target.clientWidth}px`;
+        break
+      }
+      case 'right-bottom': {
+        modal[0].style.top = `${this.config.offsetTop - modal[0].offsetHeight + button.target.clientHeight}px`; // DONE
+        modal[0].style.left = `${this.config.offsetLeft + button.target.clientWidth}px`;
         break
       }
     }
@@ -114,11 +114,12 @@ export class ModalComponent implements OnDestroy {
   open($event?: any): void {
     document.body.classList.add('modal-open');
     let dialog: any = document.body.getElementsByClassName('modal-dialog');
-    this.config.offsetLeft = $event ? $event.srcElement['offsetLeft'] : 0
-    this.config.offsetTop = $event ? $event.srcElement['offsetTop'] : 0
+    console.log($event);
     this.visible = true;
     setTimeout(() => {
       this.visibleAnimate = true;
+      this.config.offsetLeft = $event ? $event.srcElement['offsetLeft'] : 0
+      this.config.offsetTop = $event ? $event.srcElement['offsetTop'] : 0
       this.setPosition(this.config.position, dialog, $event)
     });
   }
