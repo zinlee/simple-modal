@@ -11,7 +11,7 @@
       <input type="text" [(ngModel)]="config.position">
     </div>
     
-    <div id="actions" style="position: relative">
+    <div id="actions">
         <button class="big" (click)="modal.open($event)">Modal</button>
       <button class="hidden" (click)="ignoreClickOutside.open()">Prevent modal to be dismissed when clicking outside it</button>
 
@@ -34,3 +34,5 @@
     </modal>
 
 </div>
+
+<button class="big" (click)="modal.open($event)">Modal_1</button>

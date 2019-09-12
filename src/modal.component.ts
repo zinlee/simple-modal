@@ -59,15 +59,15 @@ export class ModalComponent implements OnDestroy {
         modal[0].style.top = `${this.config.offsetTop - modal[0].offsetHeight}px`;
         modal[0].style.left = `${this.config.offsetLeft - (modal[0].offsetWidth - button.target.clientWidth)}px`;
         break
-      }
+      } // DONE ALL TOP
       // LEFT
       case 'left-top': {
-        modal[0].style.top = `${this.config.offsetTop}px`;
+        modal[0].style.top = `${this.config.offsetTop - (modal[0].offsetHeight - button.target.clientHeight)}px`;
         modal[0].style.left = `${this.config.offsetLeft - modal[0].offsetWidth}px`; // DONE
         break
       }
       case 'left-center': {
-        modal[0].style.top = `${(this.config.offsetTop - (modal[0].offsetHeight - button.target.clientHeight)/2)}px`; // DONE
+        modal[0].style.top = `${(this.config.offsetTop - modal[0].offsetHeight - button.target.clientHeight)}px`; // DONE
         modal[0].style.left = `${this.config.offsetLeft - modal[0].offsetWidth}px`;
         break
       }
@@ -113,19 +113,23 @@ export class ModalComponent implements OnDestroy {
 
   open($event?: any): void {
     document.body.classList.add('modal-open');
+    document.body.style.overflow = 'hidden';
     let dialog: any = document.body.getElementsByClassName('modal-dialog');
-    console.log($event);
     this.visible = true;
     setTimeout(() => {
       this.visibleAnimate = true;
-      this.config.offsetLeft = $event ? $event.srcElement['offsetLeft'] : 0
-      this.config.offsetTop = $event ? $event.srcElement['offsetTop'] : 0
+      this.config.offsetLeft = $event ? ( 
+        $event.srcElement.parentElement['offsetLeft']? $event.srcElement.parentElement['offsetLeft']: - - $event.srcElement['offsetLeft']) : 0
+        this.config.offsetTop = $event ? ( 
+          $event.srcElement.parentElement['offsetTop']? $event.srcElement.parentElement['offsetTop'] : - - $event.srcElement['offsetTop']) : 0
+          console.log(this.config);
       this.setPosition(this.config.position, dialog, $event)
     });
   }
 
   close(): void {
     document.body.classList.remove('modal-open');
+    document.body.style.overflow = '';
 
     this.visibleAnimate = false;
     setTimeout(() => {
